@@ -58,7 +58,7 @@ body::after{
 /* ========== 场景A：信封 ========== */
 #sceneEnvelope{cursor:pointer}
 .env-top{display:none}
-.env-wrap{position:relative;perspective:1400px;animation:riseUp 1.2s cubic-bezier(.2,.7,.3,1) both .15s}
+.env-wrap{position:relative;animation:riseUp 1.2s cubic-bezier(.2,.7,.3,1) both .15s}
 @keyframes riseUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
 /* 品牌与校徽 */
 .brand-logo{height:42px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
@@ -66,7 +66,7 @@ body::after{
 .env-college{font-family:var(--serif);letter-spacing:.55em;text-indent:.55em;font-size:clamp(12px,2.6vw,15px);color:var(--ink-3)}
 @keyframes fadeDn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
 
-.envelope{position:relative;width:min(86vw,470px);aspect-ratio:1.45;transform-style:preserve-3d;
+.envelope{position:relative;width:min(86vw,470px);aspect-ratio:1.45;
   filter:drop-shadow(0 34px 50px rgba(0,0,0,.55));animation:envFloat 6s ease-in-out infinite}
 @keyframes envFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 #sceneEnvelope.opening .envelope{animation:envStill .3s ease both}
@@ -107,18 +107,18 @@ body::after{
   font-family:var(--serif);font-size:clamp(10px,2.2vw,12.5px);letter-spacing:.32em;text-indent:.32em;color:rgba(236,229,210,.5)}
 
 .env-flap{position:absolute;top:0;left:0;right:0;height:52%;z-index:4;
-  transform-origin:top center;transform-style:preserve-3d;
-  transition:transform .7s cubic-bezier(.5,.05,.3,1),opacity .5s ease .15s}
-#sceneEnvelope.flap-open .env-flap{transform:rotateX(-150deg);opacity:0}
+  transform-origin:top center;
+  transition:transform .6s ease,opacity .45s ease .1s}
+/* 纯2D：封盖上提收窄并淡出，无任何旋转 */
+#sceneEnvelope.flap-open .env-flap{transform:translateY(-12%) scaleY(.5);opacity:0}
 #sceneEnvelope.flap-back .env-flap{z-index:1}
-.flap-face{position:absolute;inset:0;backface-visibility:hidden;clip-path:polygon(0 0,100% 0,50% 100%)}
+.flap-face{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%)}
 .flap-front{background:linear-gradient(180deg,#223060,#141c42 70%,#101736)}
 .flap-front .ln{position:absolute;height:2px;top:0}
 .flap-front .ln-l{left:0;width:72.2%;transform-origin:left top;transform:rotate(35.7deg);
   background:linear-gradient(90deg,rgba(245,217,138,.95),rgba(217,180,92,.1))}
 .flap-front .ln-r{right:0;width:72.2%;transform-origin:right top;transform:rotate(-35.7deg);
   background:linear-gradient(270deg,rgba(245,217,138,.95),rgba(217,180,92,.1))}
-.flap-back{transform:rotateX(180deg);background:linear-gradient(0deg,#1a2450,#0f1734)}
 
 .wax{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);width:86px;height:86px;z-index:5;
   border-radius:46% 54% 52% 48%/52% 46% 54% 48%;
@@ -155,7 +155,7 @@ body::after{
   background:linear-gradient(172deg,#faf3e0 0%,#f3e7c9 55%,#ecdcb4 100%);
   border-radius:8px;padding:clamp(26px,5vw,46px) clamp(22px,5vw,44px);
   color:var(--paper-ink);box-shadow:0 30px 70px rgba(0,0,0,.6),0 4px 14px rgba(0,0,0,.4);
-  transform-style:preserve-3d;transition:transform .25s ease}
+  transform-style:flat;transition:transform .25s ease}
 .letter-card::before{content:"";position:absolute;inset:9px;border:1px solid rgba(150,110,50,.5);border-radius:5px;pointer-events:none}
 .letter-card::after{content:"";position:absolute;inset:14px;border:1px solid rgba(150,110,50,.25);border-radius:4px;pointer-events:none}
 .lc-badge{width:66px;height:66px;margin:0 auto 16px;border-radius:50%;flex:none;
@@ -477,7 +477,6 @@ footer b{color:var(--gold);font-weight:600}
       </div>
       <div class="env-flap">
         <div class="flap-face flap-front"><span class="ln ln-l"></span><span class="ln ln-r"></span></div>
-        <div class="flap-face flap-back"></div>
       </div>
       <div class="wax"><span>邀</span></div>
     </div>
