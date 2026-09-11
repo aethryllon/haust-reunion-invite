@@ -20,34 +20,21 @@
     imgUrl: 'https://haust-reunion.surge.sh/share-thumb.jpg'
   };
 
-  /* ---------- 调试支持（?wxdebug=1） ---------- */
+  /* ---------- 调试支持（?wxdebug=1，仅输出到浏览器控制台，页面上不显示任何东西） ---------- */
   var debugMode = /[?&]wxdebug=1(?:&|$)/.test(location.search);
-  var dbgSteps = [];
   function dbg(step, ok) {
-    dbgSteps.push((ok === false ? '✗ ' : '✓ ') + step);
     if (debugMode && window.console) {
       try { console.log('[wx-share]', step); } catch (e) {}
     }
-  }
-  function renderDebugPanel() {
-    if (!debugMode) return;
-    try {
-      var panel = document.createElement('div');
-      panel.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:2147483647;max-width:78vw;' +
-        'background:rgba(0,0,0,.82);color:#7f7;border-radius:8px;padding:8px 12px;' +
-        'font:11px/1.7 monospace;white-space:pre-wrap;word-break:break-all;pointer-events:auto;';
-      panel.textContent = '— 微信分享调试 —\n' + dbgSteps.join('\n');
-      document.body.appendChild(panel);
-    } catch (e) {}
   }
 
   /* ---------- 环境判断 ---------- */
   var isWechat = /MicroMessenger/i.test(navigator.userAgent);
   dbg('浏览器: ' + (isWechat ? '微信内置' : '非微信（普通浏览器）'));
 
-  if (!isWechat) { dbg('非微信环境，跳过 JSSDK，使用 meta 方案'); renderDebugPanel(); return; }
-  if (typeof wx === 'undefined') { dbg('jweixin-1.6.0.js 未加载成功，降级 meta 方案', false); renderDebugPanel(); return; }
-  if (!SIGNATURE_API) { dbg('未配置 SIGNATURE_API（签名服务未部署），降级 meta 方案'); renderDebugPanel(); return; }
+  if (!isWechat) { dbg('非微信环境，跳过 JSSDK，使用 meta 方案'); return; }
+  if (typeof wx === 'undefined') { dbg('jweixin-1.6.0.js 未加载成功，降级 meta 方案', false); return; }
+  if (!SIGNATURE_API) { dbg('未配置 SIGNATURE_API（签名服务未部署），降级 meta 方案'); return; }
 
   /* ---------- 请求签名（XHR，兼容老内核） ---------- */
   var signUrl = location.href.split('#')[0];
@@ -73,7 +60,7 @@
   }
 
   getConfig(function (err, cfg) {
-    if (err) { dbg(err + '，降级 meta 方案', false); renderDebugPanel(); return; }
+    if (err) { dbg(err + '，降级 meta 方案', false); return; }
     dbg('签名获取成功 appId=' + cfg.appId);
 
     wx.config({
@@ -100,13 +87,13 @@
         imgUrl: WECHAT_SHARE.imgUrl,
         fail: function (res) { dbg('updateTimelineShareData 失败: ' + JSON.stringify(res), false); }
       });
-      renderDebugPanel();
+     
     });
 
     wx.error(function (res) {
       // 常见原因：公众号未配置 JS 安全域名 / 签名过期 / IP 白名单未加云函数出口 IP
       dbg('wx.error: ' + JSON.stringify(res), false);
-      renderDebugPanel();
+     
     });
   });
 })();
