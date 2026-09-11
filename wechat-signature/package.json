@@ -1,0 +1,7 @@
+{
+  "name": "wechat-signature",
+  "version": "1.0.0",
+  "description": "微信 JS-SDK 签名云函数（腾讯云 CloudBase / SCF 通用）",
+  "main": "index.js",
+  "dependencies": {}
+}
