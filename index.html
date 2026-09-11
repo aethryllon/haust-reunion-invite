@@ -218,8 +218,8 @@ body::after{
 /* 进度条 & 导航 */
 #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;
   background:linear-gradient(90deg,#8a6a2b,#f5d98a,#d9b45c);box-shadow:0 0 10px rgba(245,217,138,.6)}
-#topNav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:70;
-  display:flex;gap:2px;padding:5px;border-radius:999px;max-width:92vw;
+#topNav{position:fixed;top:12px;left:0;right:0;margin:0 auto;z-index:70;
+  display:flex;gap:2px;padding:5px;border-radius:999px;width:max-content;max-width:92vw;
   background:rgba(10,15,36,.55);border:1px solid rgba(217,180,92,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   opacity:0;transition:opacity .6s ease .3s}
 #sceneMain.ready #topNav{opacity:1}
@@ -482,7 +482,8 @@ footer b{color:var(--gold);font-weight:600}
   .prep-node .d{margin-top:0}
   .prep-node .t{margin-top:2px}
   .budget-hero{grid-template-columns:1fr}
-  #topNav a{padding:6px 10px;font-size:12px}
+  #topNav a{padding:6px 8px;font-size:12px;letter-spacing:.06em}
+  #topNav .nav-signup{padding:6px 11px}
   .hero-20{right:-18%}
 }
 @media (prefers-reduced-motion:reduce){
@@ -569,11 +570,11 @@ footer b{color:var(--gold);font-weight:600}
   <div id="progress"></div>
   <nav id="topNav">
     <a href="#overview" class="cur">概况</a>
-    <a href="#schedule">三日日程</a>
+    <a href="#schedule">日程</a>
     <a href="#budget">预算</a>
-    <a href="#team">筹备分工</a>
+    <a href="#team">分工</a>
     <a href="#notes">须知</a>
-    <a class="nav-signup" href="https://sh0zuxpynv.jiandaoyun.com/f/6aa2506fea5e50205d186615" target="_blank" rel="noopener">✍️ 参加报名</a>
+    <a class="nav-signup" href="https://sh0zuxpynv.jiandaoyun.com/f/6aa2506fea5e50205d186615" target="_blank" rel="noopener">✍️ 报名</a>
   </nav>
 
   <!-- Hero -->
