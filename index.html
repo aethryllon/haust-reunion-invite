@@ -420,6 +420,18 @@ tr.total td{color:var(--gold-b);font-weight:700;background:rgba(217,180,92,.1);f
   color:var(--gold-b);border:1px solid rgba(217,180,92,.4);transition:.3s}
 .mini-link:hover{background:rgba(217,180,92,.12);transform:translateY(-2px)}
 
+/* 海报分享区块 */
+.share-poster{margin:26px auto 0;max-width:560px;text-align:center;padding:clamp(22px,4vw,32px) clamp(16px,4vw,28px);
+  border:1px solid rgba(217,180,92,.42);border-radius:20px;
+  background:linear-gradient(160deg,rgba(217,180,92,.12),rgba(217,180,92,.03))}
+.share-poster h3{font-family:var(--serif);font-size:clamp(17px,3.8vw,21px);letter-spacing:.18em;text-indent:.18em;color:var(--gold-b);margin-bottom:12px}
+.sp-tip,.sp-tip2{font-family:var(--kai);font-size:clamp(12.5px,2.9vw,14px);color:var(--ink-2);line-height:1.9}
+.sp-tip{margin-bottom:16px}
+.sp-tip2{margin-top:14px}
+.sp-img-wrap{display:inline-block;border-radius:14px;overflow:hidden;border:1px solid rgba(217,180,92,.5);
+  box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.sp-img{display:block;width:min(74vw,320px);height:auto}
+
 footer{padding:44px 20px 60px;text-align:center;color:var(--ink-3);font-size:12px;letter-spacing:.22em;line-height:2.4;border-top:1px solid rgba(217,180,92,.1)}
 footer b{color:var(--gold);font-weight:600}
 
@@ -459,8 +471,8 @@ footer b{color:var(--gold);font-weight:600}
 </head>
 <body class="locked">
 
-<!-- 微信分享缩略图（页面首图，勿删） -->
-<img src="share-thumb.jpg" alt="科大廿载·青春再聚 毕业二十周年同学聚会" style="position:absolute;left:-9999px;top:-9999px;width:500px;height:400px">
+<!-- 微信分享缩略图：需在视口内渲染（1%不透明度）才会被微信抓取，勿改为display:none或移出屏幕 -->
+<img src="share-thumb.jpg" alt="科大廿载·青春再聚 毕业二十周年同学聚会" style="position:fixed;top:0;left:0;width:300px;height:300px;opacity:.01;z-index:-1;pointer-events:none">
 
 <canvas id="bgCanvas" aria-hidden="true"></canvas>
 <canvas id="fxCanvas" aria-hidden="true"></canvas>
@@ -825,6 +837,12 @@ footer b{color:var(--gold);font-weight:600}
       <h3>📋 参与问卷 · 在线报名</h3>
       <p>请各位同学填写报名信息——参加意向、到达时间、交通方式、<br>同行家属、住宿与饮食需求等，便于筹备组统一安排</p>
       <a class="su-link" href="https://sh0zuxpynv.jiandaoyun.com/f/6aa2506fea5e50205d186615" target="_blank" rel="noopener">立即填写报名表</a>
+    </div>
+    <div class="share-poster rv">
+      <h3>📲 分享给老同学</h3>
+      <p class="sp-tip">微信内打开本页的同学——长按下方海报可保存图片，转发到群里</p>
+      <div class="sp-img-wrap"><img class="sp-img" src="share-poster.jpg" alt="聚会邀请海报，长按保存转发"></div>
+      <p class="sp-tip2">或将本页分享给朋友：右上角「 … 」→ 发送给朋友</p>
     </div>
   </section>
 
