@@ -68,9 +68,9 @@ body::after{
 
 .envelope{position:relative;width:min(86vw,470px);aspect-ratio:1.45;transform-style:preserve-3d;
   filter:drop-shadow(0 34px 50px rgba(0,0,0,.55));animation:envFloat 6s ease-in-out infinite}
-@keyframes envFloat{0%,100%{transform:translateY(0) rotateX(6deg)}50%{transform:translateY(-10px) rotateX(6deg)}}
+@keyframes envFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 #sceneEnvelope.opening .envelope{animation:envStill .3s ease both}
-@keyframes envStill{to{transform:translateY(0) rotateX(4deg)}}
+@keyframes envStill{to{transform:translateY(0)}}
 
 .env-back{position:absolute;inset:0;border-radius:10px;z-index:1;
   background:linear-gradient(165deg,#1a2450,#101736 60%,#0c1230);
@@ -145,11 +145,10 @@ body::after{
 /* ========== 场景B：请柬 ========== */
 #sceneLetter{z-index:55;transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
 #sceneLetter.hidden-init{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
-.letter-stage{perspective:1100px;transform-origin:50% 100%;animation:cardUnfold 1.15s cubic-bezier(.23,.68,.32,1.02) both}
-@keyframes cardUnfold{
-  0%{opacity:0;transform:perspective(1100px) rotateX(36deg) scale(.88) translateY(26px)}
-  55%{opacity:1}
-  100%{opacity:1;transform:perspective(1100px) rotateX(0deg) scale(1) translateY(0)}}
+.letter-stage{animation:cardPresent 1.15s cubic-bezier(.22,.7,.3,1) both}
+@keyframes cardPresent{
+  0%{opacity:0;transform:translateY(44px) scale(.9)}
+  100%{opacity:1;transform:translateY(0) scale(1)}}
 .letter-float{animation:levitate 5.5s ease-in-out infinite}
 @keyframes levitate{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 .letter-card{position:relative;width:min(92vw,560px);max-height:min(78vh,760px);overflow-y:auto;overflow-x:hidden;
@@ -1003,18 +1002,6 @@ $('#enterBtn').addEventListener('click',function(){
   },400);
   setTimeout(function(){sceneB.style.visibility='hidden'},1150);
 });
-
-/* ---------- 请柬鼠标轻倾斜 ---------- */
-var card=$('#letterCard');
-if(window.matchMedia&&window.matchMedia('(pointer:fine)').matches&&!reduced){
-  card.addEventListener('pointermove',function(e){
-    var r=card.getBoundingClientRect();
-    var rx=((e.clientY-r.top)/r.height-.5)*-5;
-    var ry=((e.clientX-r.left)/r.width-.5)*6;
-    card.style.transform='perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
-  });
-  card.addEventListener('pointerleave',function(){card.style.transform=''});
-}
 
 /* ---------- Tabs ---------- */
 $$('.tab-btn').forEach(function(btn){
