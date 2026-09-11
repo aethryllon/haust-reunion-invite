@@ -14,7 +14,7 @@
   var SIGNATURE_API = '';   // 例：'https://xxxx.xxxxx.tcloudbaseapp.com/wechat-signature'
 
   var WECHAT_SHARE = {
-    title: '科大廿载 · 青春再聚｜机制025班毕业20周年同学聚会',
+    title: '科大廿载 · 青春再聚｜机制025班毕业20周年同学聚会邀请函',
     desc: '2026年10月2日—4日，相约洛阳 · 河南科技大学西苑校区。廿载光阴，再回西苑，共赴青春之约。',
     link: 'https://haust-reunion.surge.sh/',
     imgUrl: 'https://haust-reunion.surge.sh/share-logo-v2.jpg'
