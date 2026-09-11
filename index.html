@@ -443,7 +443,8 @@ tr.total td{color:var(--gold-b);font-weight:700;background:rgba(217,180,92,.1);f
 .sp-tip2{margin-top:14px}
 .sp-img-wrap{display:inline-block;border-radius:14px;overflow:hidden;border:1px solid rgba(217,180,92,.5);
   box-shadow:0 18px 50px rgba(0,0,0,.5)}
-.sp-img{display:block;width:min(74vw,320px);height:auto}
+.sp-img{display:block;width:320px;max-width:74vw;height:auto;margin:0 auto}
+@media (min-width:481px){.sp-img{width:min(74vw,340px)}}
 
 /* 背景音乐按钮 */
 #bgmBtn{position:fixed;right:16px;bottom:66px;z-index:70;width:40px;height:40px;border-radius:50%;
