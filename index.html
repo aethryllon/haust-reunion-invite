@@ -78,12 +78,19 @@ body::after{
 .env-letter{position:absolute;left:5.5%;top:6%;width:89%;height:88%;z-index:2;border-radius:6px;
   background:linear-gradient(175deg,#f9f1dc,#efe2c2);
   display:flex;align-items:center;justify-content:center;
-  transition:transform 1s cubic-bezier(.22,.61,.36,1),opacity .5s ease;
+  transition:transform 1.25s cubic-bezier(.25,.5,.3,1),opacity .5s ease;
   box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .env-letter .in-title{writing-mode:vertical-rl;font-family:var(--kai);font-size:clamp(22px,5vw,30px);
   letter-spacing:.5em;color:#7a5a26;font-weight:700}
 .env-letter .in-sub{position:absolute;bottom:12px;font-family:var(--serif);font-size:11px;letter-spacing:.35em;color:#a08850}
-#sceneEnvelope.letter-out .env-letter{transform:translateY(-108%) scale(1.04)}
+/* 抽出：缓缓上移，下缘仍含在信封口袋中 */
+#sceneEnvelope.letter-out .env-letter{transform:translateY(-66%)}
+/* 飞向屏幕：放大至眼前，信封体退场下沉 */
+#sceneEnvelope.letter-fly .env-letter{transform:translateY(-16%) scale(2.1);z-index:6;
+  transition:transform 1.05s cubic-bezier(.3,.55,.25,1),opacity .5s ease}
+.env-back,.env-pocket{transition:opacity .7s ease,transform .7s ease}
+#sceneEnvelope.letter-fly .env-back,
+#sceneEnvelope.letter-fly .env-pocket{opacity:0;transform:translateY(46px)}
 
 .env-pocket{position:absolute;inset:0;z-index:3;border-radius:0 0 10px 10px;
   clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);
@@ -101,8 +108,8 @@ body::after{
 
 .env-flap{position:absolute;top:0;left:0;right:0;height:52%;z-index:4;
   transform-origin:top center;transform-style:preserve-3d;
-  transition:transform .85s cubic-bezier(.55,.06,.28,.91),opacity .55s ease .35s}
-#sceneEnvelope.flap-open .env-flap{transform:rotateX(-178deg);opacity:0}
+  transition:transform .7s cubic-bezier(.5,.05,.3,1),opacity .5s ease .15s}
+#sceneEnvelope.flap-open .env-flap{transform:rotateX(-150deg);opacity:0}
 #sceneEnvelope.flap-back .env-flap{z-index:1}
 .flap-face{position:absolute;inset:0;backface-visibility:hidden;clip-path:polygon(0 0,100% 0,50% 100%)}
 .flap-front{background:linear-gradient(180deg,#223060,#141c42 70%,#101736)}
@@ -138,7 +145,11 @@ body::after{
 /* ========== 场景B：请柬 ========== */
 #sceneLetter{z-index:55;transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
 #sceneLetter.hidden-init{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
-.letter-stage{perspective:1100px;animation:riseUp .9s cubic-bezier(.2,.75,.3,1.15) both}
+.letter-stage{perspective:1100px;transform-origin:50% 100%;animation:cardUnfold 1.15s cubic-bezier(.23,.68,.32,1.02) both}
+@keyframes cardUnfold{
+  0%{opacity:0;transform:perspective(1100px) rotateX(36deg) scale(.88) translateY(26px)}
+  55%{opacity:1}
+  100%{opacity:1;transform:perspective(1100px) rotateX(0deg) scale(1) translateY(0)}}
 .letter-float{animation:levitate 5.5s ease-in-out infinite}
 @keyframes levitate{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 .letter-card{position:relative;width:min(92vw,560px);max-height:min(78vh,760px);overflow-y:auto;overflow-x:hidden;
@@ -967,15 +978,16 @@ function openInvite(){
   if(opened)return;opened=true;
   chime();
   sceneA.classList.add('opening');
-  setTimeout(function(){sceneA.classList.add('flap-open')},280);
-  setTimeout(function(){sceneA.classList.add('flap-back')},700);
-  setTimeout(function(){sceneA.classList.add('letter-out')},830);
-  setTimeout(function(){sceneA.classList.add('burst')},1400);
+  setTimeout(function(){sceneA.classList.add('flap-open')},300);
+  setTimeout(function(){sceneA.classList.add('flap-back')},760);
+  setTimeout(function(){sceneA.classList.add('letter-out')},880);
+  setTimeout(function(){sceneA.classList.add('letter-fly')},2200);
+  setTimeout(function(){sceneA.classList.add('burst')},2280);
   setTimeout(function(){
     sceneA.classList.add('gone');
     sceneB.classList.remove('hidden-init');
-  },1720);
-  setTimeout(function(){sceneA.style.visibility='hidden'},2500);
+  },3300);
+  setTimeout(function(){sceneA.style.visibility='hidden'},4050);
 }
 sceneA.addEventListener('click',openInvite);
 sceneA.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')openInvite()});
